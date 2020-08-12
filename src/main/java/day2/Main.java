@@ -16,5 +16,15 @@ public class Main {
     public static void main(String[] args) {
         fillArrayWithRandom(unsorted, COUNT_OF_NUMBERS);
         MyOwnSort.selectionSort(unsorted);
+
+        new Building.Apartment("st. Market", 1,2);
+        new Building.House("firasdf", 4, 6);
+        new Building.Shop("Wallmart", 7, 2);
+
+        System.out.println("\nAll Residental: \n");
+        Building.printAllResidental();
+
+        System.out.println("All NonResidental: \n");
+        Building.printAllNonResidental();
     }
 }
