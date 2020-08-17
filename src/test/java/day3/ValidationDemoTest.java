@@ -8,8 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class ValidationDemoTest {
@@ -18,7 +19,7 @@ public class ValidationDemoTest {
 
     private String baseUrl = "http://demo.guru99.com/V1/index.php";
 
-    @BeforeTest
+    @BeforeClass
     public void InitThis() {
 //        System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
 //        driver = new ChromeDriver();
@@ -66,7 +67,7 @@ public class ValidationDemoTest {
         //driver.quit();
     }
 
-    @AfterTest
+    @AfterClass
     public void closeBrowser() {
         driver.quit();
     }

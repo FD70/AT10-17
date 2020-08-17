@@ -4,24 +4,29 @@ import day3.CDF.ChromeDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
+import org.testng.annotations.*;
 import java.io.IOException;
 
 public class Sample4 {
+    WebDriver driver;
 
-    public static void main(String[] args) {
-        //System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
+    @BeforeClass
+    public void initThis() {
+        driver = ChromeDriverFactory.initCD();
+    }
+
+    @Test
+    public void sample4() {
 
         String baseUrl = "http://demo.guru99.com/test/yahoo.html";
-        //WebDriver driver = new ChromeDriver();
-        WebDriver driver = ChromeDriverFactory.initCD();
+
         driver.get(baseUrl);
         WebElement downloadButton = driver.findElement(By.id("messenger-download"));
         String sourceLocation = downloadButton.getAttribute("href");
 
 
-        String wgetCommand = "wget -P /Users/igor/Downloads/test --no-check-certificate " + sourceLocation;
+        String wgetCommand = "wget -P /Users/fd70000000/Downloads/test --no-check-certificate " + sourceLocation;
         System.out.println(wgetCommand);
         try {
             Process exec = Runtime.getRuntime().exec(wgetCommand);
@@ -29,9 +34,11 @@ public class Sample4 {
             System.out.println("Exit value: " + exitVal);
         } catch (InterruptedException | IOException ex) {
             System.out.println(ex.toString());
-        } finally {
-            // remove file
-            driver.quit();
         }
+    }
+
+    @AfterClass
+    public void closeBrowser() {
+        driver.quit();
     }
 }

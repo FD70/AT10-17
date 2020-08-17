@@ -3,18 +3,24 @@ package day3.changedClasses;
 import day3.CDF.ChromeDriverFactory;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AlertDemo {
+import org.testng.annotations.*;
 
-    public static void main(String[] args) throws NoAlertPresentException,InterruptedException  {
-        //System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
-        //WebDriver driver = new ChromeDriver();
-        WebDriver driver = ChromeDriverFactory.initCD();
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+public class AlertDemo {
+    private WebDriver driver;
+    private WebDriverWait wait;
+
+    @BeforeClass
+    public void initThis() {
+        driver = ChromeDriverFactory.initCD();
+        wait = new WebDriverWait(driver, 20);
+    }
+
+    @Test
+    public void alertDemo() {
 
         // Alert Message handling
         driver.get("http://demo.guru99.com/test/delete_customer.php");
@@ -45,6 +51,10 @@ public class AlertDemo {
 
         alert2.accept();
 
+    }
+
+    @AfterClass
+    public void closeBrowser() {
         driver.quit();
     }
 }

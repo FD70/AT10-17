@@ -4,19 +4,24 @@ import day3.CDF.ChromeDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import org.testng.annotations.*;
 import java.util.Set;
 
 public class PopupDemo {
+    private WebDriver driver;
+    private WebDriverWait wait;
 
-    public static void main(String[] args) throws InterruptedException {
-//        System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
-//        WebDriver driver=new ChromeDriver();
-        WebDriver driver = ChromeDriverFactory.initCD();
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+    @BeforeClass
+    public void initThis() {
+        driver = ChromeDriverFactory.initCD();
+        wait = new WebDriverWait(driver, 20);
+    }
+
+    @Test
+    public void popupDemo() {
 
         //Launching the site.
         driver.get("http://demo.guru99.com/popup.php");
@@ -24,17 +29,15 @@ public class PopupDemo {
 
         driver.findElement(By.xpath("//*[contains(@href,'popup.php')]")).click();
 
-        String mainWindow=driver.getWindowHandle();
+        String mainWindow = driver.getWindowHandle();
         System.out.println("Main window handle = " + mainWindow);
 
         // To handle all new opened window.
-        Set<String> allWindows=driver.getWindowHandles();
+        Set<String> allWindows = driver.getWindowHandles();
 
-        for (String childWindow : allWindows)
-        {
+        for (String childWindow : allWindows) {
 
-            if(!mainWindow.equalsIgnoreCase(childWindow))
-            {
+            if (!mainWindow.equalsIgnoreCase(childWindow)) {
                 System.out.println("Child window handle = " + childWindow);
                 // Switching to Child window
                 driver.switchTo().window(childWindow);
@@ -58,7 +61,10 @@ public class PopupDemo {
         }
         // Switching to Parent window i.e Main Window.
         driver.switchTo().window(mainWindow);
+    }
 
+    @AfterClass
+    public void closeBrowser() {
         driver.quit();
     }
 }

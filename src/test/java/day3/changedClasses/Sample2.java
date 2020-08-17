@@ -4,14 +4,19 @@ import day3.CDF.ChromeDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import org.testng.annotations.*;
 
 public class Sample2 {
-    public static void main(String[] args) {
-        //System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
-        // declaration and instantiation of objects/variables
-        //WebDriver driver = new ChromeDriver();
-        WebDriver driver = ChromeDriverFactory.initCD();
+    public WebDriver driver;
+
+    @BeforeClass
+    public void initThis() {
+        driver = ChromeDriverFactory.initCD();
+    }
+
+    @Test
+    public void sample2() {
 
         String baseUrl = "http://demo.guru99.com/test/login.html";
         driver.get(baseUrl);
@@ -46,8 +51,10 @@ public class Sample2 {
         driver.findElement(By.name("passwd")).sendKeys("abcdefghlkjl");
         driver.findElement(By.id("SubmitLogin")).submit();
         System.out.println("Login Done with Submit");
-//
-//        driver.quit();
+    }
 
+    @AfterClass
+    public void closeBrowser() {
+        driver.quit();
     }
 }

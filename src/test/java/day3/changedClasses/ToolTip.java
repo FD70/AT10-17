@@ -4,16 +4,23 @@ import day3.CDF.ChromeDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import org.testng.annotations.*;
 
 public class ToolTip {
-    public static void main(String[] args) {
-        //System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
+
+    WebDriver driver;
+
+    @BeforeClass
+    public void initThis() {
+        driver = ChromeDriverFactory.initCD();
+    }
+
+    @Test
+    public void toolTip() {
 
         String baseUrl = "http://demo.guru99.com/test/social-icon.html";
 
-        //WebDriver driver = new ChromeDriver();
-        WebDriver driver = ChromeDriverFactory.initCD();
         driver.get(baseUrl);
         String expectedTooltip = "Github";
 
@@ -32,6 +39,10 @@ public class ToolTip {
         else {
             System.out.println("Test Case FAILED");
         }
+    }
+
+    @AfterClass
+    public void closeBrowser() {
         driver.quit();
     }
 }
