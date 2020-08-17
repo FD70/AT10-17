@@ -3,9 +3,7 @@ package day3;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.testng.BrowserPerTest;
 import com.codeborne.selenide.testng.ScreenShooter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import day3.SelenidPages.github.*;
 
 
