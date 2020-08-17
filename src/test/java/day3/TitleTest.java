@@ -1,5 +1,6 @@
 package day3;
 
+import day3.CDF.ChromeDriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -13,8 +14,9 @@ public class TitleTest {
 
     @BeforeClass
     public void openSite() {
-        System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
-        driver = new ChromeDriver();
+//        System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
+//        driver = new ChromeDriver();
+        driver = ChromeDriverFactory.initCD();
         driver.get(baseUrl);
     }
 
@@ -28,5 +30,4 @@ public class TitleTest {
     public void closeSite() {
         driver.quit();
     }
-
 }

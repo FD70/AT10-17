@@ -23,6 +23,5 @@ public class RegexTest {
         while (matcher.find()) {
             System.out.println(matcher.start() + " " + matcher.end() + " " + text.substring(matcher.start(), matcher.end()));
         }
-
     }
 }

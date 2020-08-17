@@ -1,19 +1,21 @@
 package day3;
 
+import day3.CDF.ChromeDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class FirstE2ETest {
-    public String baseUrl = "http://demo.guru99.com/test/newtours/";
-    public WebDriver driver ;
+    private String baseUrl = "http://demo.guru99.com/test/newtours/";
+    private WebDriver driver ;
 
     @BeforeClass
     public void openSite() {
-        System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
-        driver = new ChromeDriver();
+//        System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
+//        driver = new ChromeDriver();
+        driver = ChromeDriverFactory.initCD();
         driver.get(baseUrl);
     }
 
@@ -32,9 +34,7 @@ public class FirstE2ETest {
     }
 
     @AfterClass
-    public void closeSite()
-    {
+    public void closeSite() {
         driver.quit();
     }
-
 }

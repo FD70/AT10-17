@@ -1,10 +1,11 @@
 package day3;
 
+import day3.CDF.ChromeDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 public class TestOpen {
@@ -14,9 +15,10 @@ public class TestOpen {
 
     @Test
     public void testOpen() {
-        System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver,10,0);
+//        System.setProperty("webdriver.chrome.driver","/Users/igor/Applications/chromedriver");
+//        driver = new ChromeDriver();
+        driver = ChromeDriverFactory.initCD();
+        wait = new WebDriverWait(driver,30,0);
         driver.get("https://movavi.id/login");
         driver.findElement(By.xpath("//*[@id=\"emailLogin\"]")).sendKeys("maadslayer@gmail.com");
         driver.findElement(By.xpath("//*[@id=\"passwordLogin\"]")).sendKeys("Morozov617539s");
@@ -24,6 +26,10 @@ public class TestOpen {
         wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(By.id("loaderWrapper"))));
         driver.findElement(By.cssSelector(".d-md-inline")).click();
         driver.findElement(By.linkText("Мои данные")).click();
+    }
+
+    @AfterTest
+    public void closeDriver() {
         driver.quit();
     }
 }
