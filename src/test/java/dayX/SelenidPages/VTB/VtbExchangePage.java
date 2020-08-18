@@ -2,6 +2,8 @@ package dayX.SelenidPages.VTB;
 
 import static com.codeborne.selenide.Selenide.*;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class VtbExchangePage {
     private static String  url = "https://www.vtb.ru/personal/platezhi-i-perevody/obmen-valjuty/";
     static String USD = "USD";
@@ -69,8 +71,9 @@ public class VtbExchangePage {
         }
         //FIXME почему-то replace отказывается работать в этом месте
         //TestReplace ==> там работает, здесь - нет
-        result = result.replaceAll("\\s", "").replace(",",".");
-        System.out.println(result);
+        //result = result.replaceAll("\\s", "").replace(",",".");
+        result = StringUtils.deleteWhitespace(result).replace(",",".");
+        //System.out.println(result);
         return Double.parseDouble(result);
     }
 }
