@@ -1,8 +1,6 @@
 package dayX.SelenidPages.VTB;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.Wait;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class VtbExchangePage {
     private static String  url = "https://www.vtb.ru/personal/platezhi-i-perevody/obmen-valjuty/";
@@ -70,6 +68,7 @@ public class VtbExchangePage {
             }
         }
         //FIXME почему-то replace отказывается работать в этом месте
+        //TestReplace ==> там работает, здесь - нет
         result = result.replaceAll("\\s", "").replace(",",".");
         System.out.println(result);
         return Double.parseDouble(result);
