@@ -1,8 +1,7 @@
 package dayX;
 
-import java.util.Map;
 
-import io.restassured.response.Response;
+import java.util.Map;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
@@ -25,27 +24,65 @@ public class RestAssuredSample {
             CITIES, "https://wft-geo-db.p.rapidapi.com/v1/geo/cities",
             COUNTRIES, "https://wft-geo-db.p.rapidapi.com/v1/geo/countries"
     );
-
     // https://rapidapi.com/wirefreethought/api/geodb-cities/endpoints
     // Тестируем это API. По одному кейсу на  эндпоинты
     // Locales, Currencies, TimeZones, Cities, Countries.
 
+    // ... с этого ключа --
+    // Есть ограничение по числу запросов в единицу времени!
+    // Все тесты не пройдут одновременно!
+
     @Test
     public void testGetLocales() {
+        given().
+                header("x-rapidapi-host", HOST).
+                header("x-rapidapi-key", KEY).
+                queryParam("offset", "420").
+                when().
+                get(baseUrl.get(LOCALES)).
+                then().
+                assertThat().
+                body("metadata.currentOffset", equalTo(420)).
+                body("metadata.totalCount", equalTo(772));
     }
 
     @Test
     public void testGetCurrencies() {
+        given().
+                header("x-rapidapi-host", HOST).
+                header("x-rapidapi-key", KEY).
+                queryParam("offset", "42").
+                queryParam("limit", "10").
+                when().
+                get(baseUrl.get(CURRENCIES)).
+                then().
+                assertThat().
+                body("data", hasSize(10)).
+                body("metadata.currentOffset", equalTo(42));
     }
 
     @Test
     public void testGetTimezones() {
-
+        given().
+                header("x-rapidapi-host", HOST).
+                header("x-rapidapi-key", KEY).
+                when().
+                get(baseUrl.get(TIMEZONES)).
+                then().
+                assertThat().
+                body("data[1].rawUtcOffsetHours", equalTo(-4));
     }
 
     @Test
     public void testGetCities() {
-
+        given().
+                header("x-rapidapi-host", HOST).
+                header("x-rapidapi-key", KEY).
+                when().
+                get(baseUrl.get(CITIES)).
+                then().
+                assertThat().
+                body("data[4].name", equalTo("Encamp"));
     }
 
     @Test
