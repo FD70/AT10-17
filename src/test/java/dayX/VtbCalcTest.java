@@ -22,30 +22,40 @@ public class VtbCalcTest {
 
     @Test
     public void test1() {
-        Double input = 1.1;
-        Double result = page.getRurToUsdCourse(input);
+        double rur = 1.1;
+        double result = page.getRurToUsdCourse(rur);
         Assert.assertNotEquals(result, 0.0);
-        Assert.assertTrue(result < input);
+        Assert.assertTrue(rur > result);
     }
 
     @Test
     public void test2() {
-        System.out.println(page.getUsdToRurCourse(2000.2));
+        double usd = 2000.20;
+        double result = page.getUsdToRurCourse(usd);
+        Assert.assertNotEquals(result, 0.0);
+        Assert.assertTrue(usd < result );
     }
 
     @Test
     public void test3() {
-        System.out.println(page.getRurToEurCourse(3.3));
+        double rur = 31000.0;
+        double result = page.getRurToEurCourse(rur);
+        Assert.assertNotEquals(result, 0.0);
+        Assert.assertTrue(rur > result);
     }
 
     @Test
     public void test4() {
-        System.out.println(page.getEurToRurCourse(4.4));
+        double eur = 1;
+        double result = page.getEurToRurCourse(eur);
+        Assert.assertNotEquals(result, 0.0);
+        Assert.assertTrue(eur < result);
     }
 
     @Test
     public void test5() {
-        System.out.println(page.getUsdToEurCourse(5.5));
-        System.out.println(page.getEurToUsdCourse(6.6));
+        double result = page.getUsdToEurCourse(1.0);
+        System.out.println(result);
+        System.out.println(page.getEurToUsdCourse(result));
     }
 }
