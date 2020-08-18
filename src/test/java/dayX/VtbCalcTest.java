@@ -30,7 +30,7 @@ public class VtbCalcTest {
 
     @Test
     public void test2() {
-        System.out.println(page.getUsdToRurCourse(2.2));
+        System.out.println(page.getUsdToRurCourse(2000.2));
     }
 
     @Test
