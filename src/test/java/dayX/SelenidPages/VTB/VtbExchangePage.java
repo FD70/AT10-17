@@ -2,7 +2,7 @@ package dayX.SelenidPages.VTB;
 
 import static com.codeborne.selenide.Selenide.*;
 
-import org.apache.commons.lang3.StringUtils;
+//import org.apache.commons.lang3.StringUtils;
 
 public class VtbExchangePage {
     private static String  url = "https://www.vtb.ru/personal/platezhi-i-perevody/obmen-valjuty/";
@@ -29,7 +29,7 @@ public class VtbExchangePage {
         return open(url, VtbExchangePage.class);
     }
 
-    // rur eur usd
+    // get(то, что имеем)To(то, что хотим получить)
     public Double getRurToUsdCourse (Double rub) {
         return getCourse(rub, RUR, USD);
     }
@@ -69,11 +69,11 @@ public class VtbExchangePage {
                 break;
             }
         }
-        //FIXME почему-то replace отказывается работать в этом месте
+        //FIXME почему-то replace для пробелов отказывается работать в этом месте
         //TestReplace ==> там работает, здесь - нет
-        //result = result.replaceAll("\\s", "").replace(",",".");
-        result = StringUtils.deleteWhitespace(result).replace(",",".");
-        //System.out.println(result);
+        result = result.replaceAll("\\s", "").replace(",",".");
+        //result = StringUtils.deleteWhitespace(result).replace(",",".");
+        System.out.println(result);
         return Double.parseDouble(result);
     }
 }

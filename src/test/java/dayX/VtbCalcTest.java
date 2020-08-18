@@ -2,6 +2,7 @@ package dayX;
 
 
 import dayX.SelenidPages.VTB.VtbExchangePage;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -21,7 +22,10 @@ public class VtbCalcTest {
 
     @Test
     public void test1() {
-        System.out.println(page.getRurToUsdCourse(1.1));
+        Double input = 1.1;
+        Double result = page.getRurToUsdCourse(input);
+        Assert.assertNotEquals(result, 0.0);
+        Assert.assertTrue(result < input);
     }
 
     @Test
